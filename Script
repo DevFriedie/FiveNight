@@ -1,3 +1,23 @@
-while true do
-   game.ReplicatedStorage.MainEvent:FireServer("Stomp")
-end
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/GemstoneDev/Wally-V3-Backup/main/script/main.lua')))()
+
+local mainWindow = library:CreateWindow("Main")
+
+local mainFolder = mainWindow:CreateFolder("Player")
+
+local lplr = game:getService("Players").localPlayer
+
+mainFolder:Slider("WalkSpeed"),{
+    min = 16,
+    max = 250,
+    precise = false;
+},function(v)
+    lplr.Character.Humanoid.WalkSpeed = v
+end)
+
+mainFolder:Slider("JumpPower"),{
+    min = 50,
+    max = 250,
+    precise = false;
+},function(v)
+    lplr.Character.Humanoid.JumpPower = v
+end)
