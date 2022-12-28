@@ -21,3 +21,9 @@ mainFolder:Slider("JumpPower",{
 },function(v)
     lplr.Character.Humanoid.JumpPower = v
 end)
+
+mainFolder:Slider("Fly",{
+    precise = false;
+},function(v)
+    lplr.Character.Humanoid.Fly = v
+end)
