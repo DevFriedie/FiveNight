@@ -48,6 +48,7 @@ end)
 
 game.Players.PlayerRemoving:Connect(function(playerRemoved)
 	playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
+end)
 
 
 
