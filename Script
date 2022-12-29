@@ -7,12 +7,11 @@ local mainFolder = mainWindow:CreateFolder("Player")
 -- Var --
 local lplr = game:GetService("Players").LocalPlayer
 
-mainFolder:Slider("WalkSpeed",{
-	min = 16,
-	max = 75,
+mainFolder:Bind("WalkSpeed",Enum.KeyCode.C,function() --Default bind
+    print("Run Fast!")
+	lplr.Character.Humanoid.WalkSpeed = 75,
 	precise = false;
-},function(v)
-		lplr.Character.Humanoid.WalkSpeed = v
+function(v)
 end)
 
 mainFolder:Slider("JumpPower",{
