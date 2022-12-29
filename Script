@@ -1,21 +1,35 @@
---FiveNight Test--
-if game.PlaceId == 11956287645 then
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "FiveNight | FiveNight Test", HidePremium = true, SaveConfig = true, ConfigFolder = "FiveNightConfig"})
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/GemstoneDev/Wally-V3-Backup/main/script/main.lua')))()
 
-local Tab = Window:MakeTab({
-	Name = "Fly",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+local mainWindow = library:CreateWindow("Main")
 
-Tab:AddToggle({
-	Name = "Fly",
-	Default = false,
-	Callback = function(Value)
-		print(Value)
-	end    
-})
+local mainFolder = mainWindow:CreateFolder("Player")
 
-end
-OrionLib:Init()
+-- Var --
+local lplr = game:GetService("Players").LocalPlayer
+
+_G.Walk = true
+_G.Jump = true
+
+mainFolder:Slider("WalkSpeed",{
+	min = 16,
+	max = 250,
+	precise = false;
+},function(v)
+	while _G.Walk == true do
+		lplr.Character.Humanoid.WalkSpeed = v
+		wait()
+	end
+end)
+
+mainFolder:Slider("JumpPower",{
+	min = 50,
+	max = 250,
+	precise = false;
+},function(v)
+	while _G.Jump == true do
+		lplr.Character.Humanoid.JumpPower = v
+		wait()
+	end
+end)
+
+
