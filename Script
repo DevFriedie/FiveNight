@@ -4,8 +4,6 @@ local mainWindow = library:CreateWindow("Main")
 
 local mainFolder = mainWindow:CreateFolder("Player")
 
-local main2Folder = mainWindow:CreateFolder("Fun")
-
 -- Var --
 local lplr = game:GetService("Players").LocalPlayer
 local highlight = Instance.new("Highlight")
@@ -27,7 +25,7 @@ mainFolder:Slider("JumpPower",{
 		lplr.Character.Humanoid.JumpPower = v
 end)
 
-main2Folder:Slider("Esp",{
+mainFolder:Slider("Esp",{
  for i, v in pairs(Players) do
 	repeat wait() until v.Character
 	local highlightClone = highlight:Clone()
@@ -48,6 +46,9 @@ end)
 
 game.Players.PlayerRemoving:Connect(function(playerRemoved)
 	playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
+
+     )
+}
 end)
 
 
