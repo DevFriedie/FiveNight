@@ -25,7 +25,7 @@ mainFolder:Slider("JumpPower",{
 		lplr.Character.Humanoid.JumpPower = v
 end)
 
-mainFolder:Slider("Esp",{
+b:Toggle("Esp",function(bool)
  for i, v in pairs(Players) do
 	repeat wait() until v.Character
 	local highlightClone = highlight:Clone()
@@ -42,10 +42,12 @@ mainFolder:Slider("Esp",{
 	highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
 	highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	highlightClone.Name = "Highlight"
- )
-}
-end)
 
+		shared.toggle = bool
+		print(shared.toggle)
+ )
+	end)
+ 
 game.Players.PlayerRemoving:Connect(function(playerRemoved)
 	playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
 
