@@ -4,12 +4,16 @@ local mainWindow = library:CreateWindow("Main")
 
 local mainFolder = mainWindow:CreateFolder("Player")
 
+local main2Folder = mainWindow:CreateFolder("Fun")
+
 -- Var --
 local lplr = game:GetService("Players").LocalPlayer
+local highlight = Instance.new("Highlight")
+highlight.Name = "Highlight"
 
 mainFolder:Slider("WalkSpeed",{
 	min = 16,
-	max = 250,
+	max = 75,
 	precise = false;
 },function(v)
 		lplr.Character.Humanoid.WalkSpeed = v
@@ -17,11 +21,33 @@ end)
 
 mainFolder:Slider("JumpPower",{
 	min = 50,
-	max = 250,
+	max = 75,
 	precise = false;
 },function(v)
 		lplr.Character.Humanoid.JumpPower = v
 end)
+
+main2Folder:Slider("Esp",{
+ for i, v in pairs(Players) do
+	repeat wait() until v.Character
+	local highlightClone = highlight:Clone()
+	highlightClone.Adornee = v.Character
+	highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+	highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlightClone.Name = "Highlight"
+ end
+
+ game.Players.PlayerAdded:Connect(function(player)
+	repeat wait() until player.Character
+	local highlightClone = highlight:Clone()
+	highlightClone.Adornee = player.Character
+	highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+	highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	highlightClone.Name = "Highlight"
+end)
+
+game.Players.PlayerRemoving:Connect(function(playerRemoved)
+	playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
 
 
 
