@@ -13,8 +13,6 @@ mainFolder:Slider("WalkSpeed",{
 	precise = false;
 },function(v)
 		lplr.Character.Humanoid.WalkSpeed = v
-		wait()
-	end
 end)
 
 mainFolder:Slider("JumpPower",{
@@ -23,8 +21,6 @@ mainFolder:Slider("JumpPower",{
 	precise = false;
 },function(v)
 		lplr.Character.Humanoid.JumpPower = v
-		wait()
-	end
 end)
 
 
