@@ -3,6 +3,10 @@ if game.PlaceId == 11956287645 then
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "FiveNight | FiveNight Test", HidePremium = true, SaveConfig = true, ConfigFolder = "FiveNightConfig"})
 
+local mainFolder = MakeWindow:ConfigFolder("Player")
+
+local lplr = game:GetService("Players").LocalPlayer
+
 mainFolder:Slider("WalkSpeed",{
     min = 16,
     max = 250,
