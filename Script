@@ -25,7 +25,7 @@ mainFolder:Slider("JumpPower",{
 		lplr.Character.Humanoid.JumpPower = v
 end)
 
-b:Toggle("Esp",function(bool)
+mainFolder:Toggle("Esp",function(bool)
     shared.toggle = bool
     print(shared.toggle)
 	EspEnabled = boo1
@@ -50,8 +50,9 @@ while wait() do
 	highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
 	highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	highlightClone.Name = "Highlight"
-	
-	end)
+ )
+
+	end
  
 game.Players.PlayerRemoving:Connect(function(playerRemoved)
 	playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
