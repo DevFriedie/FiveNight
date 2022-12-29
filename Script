@@ -42,13 +42,13 @@ mainFolder:Slider("Esp",{
 	highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
 	highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	highlightClone.Name = "Highlight"
+ )
+}
 end)
 
 game.Players.PlayerRemoving:Connect(function(playerRemoved)
 	playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
 
-     )
-}
 end)
 
 
