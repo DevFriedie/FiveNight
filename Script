@@ -4,8 +4,6 @@ local mainWindow = library:CreateWindow("Main")
 
 local mainFolder = mainWindow:CreateFolder("Player")
 
-local main2Folder = mainWindow:CreateFolder("Fun")
-
 -- Var --
 local lplr = game:GetService("Players").LocalPlayer
 
@@ -25,10 +23,5 @@ mainFolder:Slider("JumpPower",{
 		lplr.Character.Humanoid.JumpPower = v
 end)
 
-main2Folder:Slider("Fly",{
-	precise = false;
-},function(v)
-		lplr.Character.Humanoid.Fly = v
-end)
 
 
