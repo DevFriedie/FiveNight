@@ -11,6 +11,22 @@ local RunService = game:GetService("RunService")
 local Highlight = Instance.new("Highlight")
 Highlight.Name = "Highlight"
 
+function ApplyToCurrentPlayers()
+	for i,player in pairs(Players:GetChildren()) do 
+		repeat wait() until player.Character
+		if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+			local HighlightClone = Highlight:Clone()
+			HighlightClone.Adornee = player.Character
+			HighlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+			HighlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+			HighlightClone.Name = "Highlight"
+		end
+	end
+end    
+RunService.Heartbeat:Connect(function()
+	ApplyToCurrentPlayers()
+end)
+
 mainFolder:Slider("WalkSpeed",{
 	min = 16,
 	max = 75,
@@ -27,29 +43,6 @@ mainFolder:Slider("JumpPower",{
 		lplr.Character.Humanoid.JumpPower = v
 end)
 
-mainFolder:Toggle("Esp",function(bool)
-    shared.toggle = bool
-    print(shared.toggle)
-	EspEnabled = boo1
-end)
-
-while wait() do
-	if EspEnabled == true then
-		function ApplyToCurrentPlayers()
-			for i,player in pairs(Players:GetChildren()) do 
-				repeat wait() until player.Character
-				if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
-					local HighlightClone = Highlight:Clone()
-					HighlightClone.Adornee = player.Character
-					HighlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
-					HighlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-					HighlightClone.Name = "Highlight"
-				end
-			end
-		end    
-		RunService.Heartbeat:Connect(function()
-			ApplyToCurrentPlayers()
-		end)
 
 
 
