@@ -147,6 +147,7 @@ end)
  end
 
  function Fly()
+
 	repeat wait() until game.Players.LocalPlayer.Character
  
 	local plr = game.Players.LocalPlayer
@@ -156,19 +157,19 @@ end)
 	local Mouse = plr:GetMouse()
 	local toggle = false
 	 
-	Mouse.KeyDown:Connect(function(Keybind)
+	Mouse.KeyDown:Connect(function(key)
 		if key == "f" then
 			if toggle == false then
 				toggle = true
 				local Anim = Instance.new("Animation")
-				Anim.AnimationId = ""
+				Anim.AnimationId = "rbxassetid://2426232664"
 				local PlayAnim = hum:LoadAnimation(Anim)
 				PlayAnim:Play()
 				local BV = Instance.new("BodyVelocity",Torso)
 				BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
 				while toggle == true do
 					BV.Velocity = Mouse.Hit.lookVector*100
-					wait(0.1)
+					wait()
 				end
 			end
 			if toggle == true then
@@ -179,7 +180,7 @@ end)
 					stoptracks:Stop()
 				end
 				local Anim = Instance.new("Animation")
-				Anim.AnimationId = ""
+				Anim.AnimationId = "http://www.roblox.com/asset/?id=50776..."
 				local PlayAnim = hum:LoadAnimation(Anim)
 				PlayAnim:Play()
 			end
