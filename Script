@@ -47,6 +47,7 @@ local FiveNight = Rayfield:CreateWindow({
  getgenv().MoneyESP = true
  getgenv().Fly = true
  getgenv().NoClip = true
+ getgenv().GodMode = true
 
  --Function--
  function PlayerESP()
@@ -155,7 +156,7 @@ end)
 	local Mouse = plr:GetMouse()
 	local toggle = false
 	 
-	Mouse.KeyDown:Connect(function(key)
+	Mouse.KeyDown:Connect(function(Keybind)
 		if key == "f" then
 			if toggle == false then
 				toggle = true
@@ -330,6 +331,42 @@ game:GetService("UserInputService").InputBegan:Connect(
   end)
 end
 
+function GodMode()
+	local lp = game:GetService "Players".LocalPlayer
+if lp.Character:FindFirstChild "Head" then
+    local char = lp.Character
+    char.Archivable = true
+    local new = char:Clone()
+    new.Parent = workspace
+    lp.Character = new
+    wait(2)
+    local oldhum = char:FindFirstChildWhichIsA "Humanoid"
+    local newhum = oldhum:Clone()
+    newhum.Parent = char
+    newhum.RequiresNeck = false
+    oldhum.Parent = nil
+    wait(2)
+    lp.Character = char
+    new:Destroy()
+    wait(1)
+    newhum:GetPropertyChangedSignal("Health"):Connect(
+        function()
+            if newhum.Health <= 0 then
+                oldhum.Parent = lp.Character
+                wait(1)
+                oldhum:Destroy()
+            end
+        end)
+    workspace.CurrentCamera.CameraSubject = char
+    if char:FindFirstChild "Animate" then
+        char.Animate.Disabled = true
+        wait(.1)
+        char.Animate.Disabled = false
+    end
+    lp.Character:FindFirstChild "Head":Destroy()
+end
+
+end
  local Tab = FiveNight:CreateTab("Da Hood")
 
  local Section = Tab:CreateSection("Script")
@@ -396,6 +433,15 @@ end
 	Flag = "",
 	Callback = function(Keybind)
 		NoClip()
+	end,
+ })
+
+ local Toggle = Tab:CreateToggle({
+	Name = "GodMode",
+	CurrentValue = false,
+	Flag = "", 
+	Callback = function()
+		GodMode()
 	end,
  })
 
