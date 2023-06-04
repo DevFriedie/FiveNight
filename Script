@@ -22,14 +22,14 @@ local FiveNight = Rayfield:CreateWindow({
 	   FileName = "FiveNightKey",
 	   SaveKey = true,
 	   GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-	   Key = "Awsedrftgz7!"
+	   Key = "hi"
 	}
 
  })
 
  Rayfield:Notify({
 	Title = "⚠️",
-	Content = "Only use Fluxus as executor!",
+	Content = "Only use Fluxus or Electron as executor!",
 	Duration = 6.5,
 	Actions = { 
 	   Ignore = {
@@ -42,12 +42,12 @@ local FiveNight = Rayfield:CreateWindow({
  })
 
  --Values--
- getgenv().Infinite = true
+ getgenv().AntiKick = true
 
  --Function--
 
 function Infinite()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/AntiKick'))()
 end
 
  local Tab = FiveNight:CreateTab("Main")
@@ -61,11 +61,11 @@ end
  local Section = Tab:CreateSection("Scripts")
 
  local Toggle = Tab:CreateToggle({
-	Name = "Infinite",
+	Name = "AntiKick",
 	CurrentValue = false,
 	Flag = "", 
 	Callback = function()
-		Infinite()
+		AntiKick()
 	end,
  })
 
