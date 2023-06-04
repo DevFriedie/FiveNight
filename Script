@@ -1,4 +1,4 @@
-local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local FiveNight = Rayfield:CreateWindow({
 	Name = "FiveNight",
@@ -29,7 +29,7 @@ local FiveNight = Rayfield:CreateWindow({
 
  Rayfield:Notify({
 	Title = "⚠️",
-	Content = "Only use cheats made for the game otherwise you will be banned!",
+	Content = "Only use Fluxus as executor!",
 	Duration = 6.5,
 	Actions = { 
 	   Ignore = {
@@ -42,64 +42,19 @@ local FiveNight = Rayfield:CreateWindow({
  })
 
  --Values--
- getgenv().AimBot = true
- getgenv().PlayerESP = true
- getgenv().Fly = true
  getgenv().Infinite = true
 
  --Function--
-
-function Fly()
-
-end
 
 function Infinite()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end
 
- local Tab = FiveNight:CreateTab("Script")
+ local Tab = FiveNight:CreateTab("Main")
 
- local Section = Tab:CreateSection("Da Hood")
+ local Section = Tab:CreateSection("")
 
- local Toggle = Tab:CreateToggle({
-	Name = "AimBot",
-	CurrentValue = false,
-	Flag = "", 
-	Callback = function()
-		AimBot()
-	end,
- })
 
- local Toggle = Tab:CreateToggle({
-	Name = "Player ESP",
-	CurrentValue = false,
-	Flag = "", 
-	Callback = function()
-		PlayerESP()
-	end,
- })
-
- local Keybind = Tab:CreateKeybind({
-	Name = "Fly",
-	CurrentKeybind = "X",
-	HoldToInteract = false,
-	Flag = "",
-	Callback = function()
-		Fly()
-	end,
- })
-
- local Section = Tab:CreateSection("Fruit Battlegrounds")
-
- local Keybind = Tab:CreateKeybind({
-	Name = "Fly",
-	CurrentKeybind = "X",
-	HoldToInteract = false,
-	Flag = "",
-	Callback = function()
-		Fly()
-	end,
- })
 
  local Tab = FiveNight:CreateTab("Other Scripts")
 
