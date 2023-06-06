@@ -20,7 +20,7 @@ local FiveNight = Rayfield:CreateWindow({
 	   Subtitle = "",
 	   Note = "Discord | Friedie#3095",
 	   FileName = "FiveNightKey",
-	   SaveKey = false,
+	   SaveKey = true,
 	   GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
 	   Key = "37820958560987234570"
 	}
@@ -53,11 +53,63 @@ end
 
 function FlowerESP()
 
+local RunService = game:GetService("RunService")
+
+RunService.RenderStepped:Connect(function()
+for i, v in pairs(game:GetService("Workspace").Demon_Flowers_Spawn:GetChildren()) do
+	if not v:FindFirstChild("FlowerESP") then
+		local BillboardGui = Instance.new("BillboardGui")
+		local TextLabel = Instance.new("TextLabel")
+		local Highlight = Instance.new("Highlight")
+
+BillboardGui.Parent = v
+BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+BillboardGui.Active = true
+BillboardGui.AlwaysOnTop = true
+BillboardGui.LightInfluence = 1.000
+BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+BillboardGui.Name = "FlowerESP"
+
+TextLabel.Parent = BillboardGui
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Flower "..V:FindFirstChild("BillboardGui").TextLabel.Text
+TextLabel.TextColor3 = Color3.fromRGB(0, 110, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 55.000
+TextLabel.TextStrokeTransparency = 0.250
+TextLabel.TextWrapped = true
+
+Highlight.Archivable = true
+Highlight.Adornee = v
+Highlight.Parent = v
+Highlight.Name = "ESPHighlight"
+Highlight.DephtMode = Enum.HighlightDepthMode.AlwaysOnTop
+Highlight.Enabled = true
+Highlight.FillColor = Color3.new(255,0,0)
+Highlight.FillTransparency = 0.5
+Highlight.OutlineColor = Color3.new(255,255,255)
+Highlight.OutlineTransparency = 0
+
+	end
+	end
+	end
+end)
+
 end
 
  local Tab = FiveNight:CreateTab("Main")
 
  local Section = Tab:CreateSection("Main Settings")
+
+ local Button = Tab:CreateButton({
+	Name = "FlowerESP",
+	Callback = function()
+	FlowerESP()
+	end,
+ })
 
 
 
