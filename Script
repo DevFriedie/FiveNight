@@ -88,6 +88,8 @@ Textlabel.TextWrapped = true
 	end
 end)
 
+end
+
  local Tab = FiveNight:CreateTab("Main")
 
  local Section = Tab:CreateSection("Main Settings")
