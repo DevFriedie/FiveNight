@@ -20,16 +20,16 @@ local FiveNight = Rayfield:CreateWindow({
 	   Subtitle = "",
 	   Note = "Discord | Friedie#3095",
 	   FileName = "FiveNightKey",
-	   SaveKey = true,
+	   SaveKey = false,
 	   GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-	   Key = "hi"
+	   Key = "37820958560987234570"
 	}
 
  })
 
  Rayfield:Notify({
 	Title = "⚠️",
-	Content = "Only use Fluxus or Electron as executor!",
+	Content = "Only use Fluxus as executor!",
 	Duration = 6.5,
 	Actions = { 
 	   Ignore = {
@@ -42,17 +42,62 @@ local FiveNight = Rayfield:CreateWindow({
  })
 
  --Values--
- getgenv().AntiKick = true
+ getgenv().Infinite = true
+ getgenv().FlowerESP = true
 
  --Function--
 
 function Infinite()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/AntiKick'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end
+
+function FlowerESP()
+
+local RunService = game:GetService("RunService")
+
+RunService.RenderStepped:Connect(function()
+for i, v in pairs(game:GetService("Workspace").Demon_Flowers_Spawn:GetChildren()) do
+	if not v:FindFirstChild("FlowerESP") then
+		local BillboardGui = Instance.new("BillboardGui")
+		local TextLabel = Instance.new("TextLabel")
+
+local BillboardGui = Instance.new("BillboardGui")
+local TextLabel = Instance.new("TextLabel")
+
+
+BillboardGui.Parent = v
+BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+BillboardGui.Active = true
+BillboardGui.AlwaysOnTop = true
+BillboardGui.LightInfluence = 1.000
+BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+BillboardGui.Name = "FlowerESP"
+
+TextLabel.Parent = BillboardGui
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Size = UDim2.new(1, 0, 1, 0)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Flower"
+TextLabel.TextColor3 = Color3.fromRGB(0, 159, 58)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+Textlabel.TextWrapped = true
+
+	end
+	end
+end)
 
  local Tab = FiveNight:CreateTab("Main")
 
- local Section = Tab:CreateSection("")
+ local Section = Tab:CreateSection("Main Settings")
+
+ local Button = Tab:CreateButton({
+	Name = "FlowerESP",
+	Callback = function()
+	FlowerESP()
+	end,
+ })
 
 
 
@@ -61,11 +106,11 @@ end
  local Section = Tab:CreateSection("Scripts")
 
  local Toggle = Tab:CreateToggle({
-	Name = "AntiKick",
+	Name = "Infinite",
 	CurrentValue = false,
 	Flag = "", 
 	Callback = function()
-		AntiKick()
+		Infinite()
 	end,
  })
 
