@@ -59,13 +59,6 @@ end
 
  local Section = Tab:CreateSection("Main Settings")
 
- local Button = Tab:CreateButton({
-	Name = "FlowerESP",
-	Callback = function()
-	FlowerESP()
-	end,
- })
-
 
 
  local Tab = FiveNight:CreateTab("Other Scripts")
