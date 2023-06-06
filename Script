@@ -53,41 +53,6 @@ end
 
 function FlowerESP()
 
-local RunService = game:GetService("RunService")
-
-RunService.RenderStepped:Connect(function()
-for i, v in pairs(game:GetService("Workspace").Demon_Flowers_Spawn:GetChildren()) do
-	if not v:FindFirstChild("FlowerESP") then
-		local BillboardGui = Instance.new("BillboardGui")
-		local TextLabel = Instance.new("TextLabel")
-
-local BillboardGui = Instance.new("BillboardGui")
-local TextLabel = Instance.new("TextLabel")
-
-
-BillboardGui.Parent = v
-BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-BillboardGui.Active = true
-BillboardGui.AlwaysOnTop = true
-BillboardGui.LightInfluence = 1.000
-BillboardGui.Size = UDim2.new(0, 200, 0, 50)
-BillboardGui.Name = "FlowerESP"
-
-TextLabel.Parent = BillboardGui
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.Size = UDim2.new(1, 0, 1, 0)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "Flower"
-TextLabel.TextColor3 = Color3.fromRGB(0, 159, 58)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14.000
-Textlabel.TextWrapped = true
-
-	end
-	end
-end)
-
 end
 
  local Tab = FiveNight:CreateTab("Main")
