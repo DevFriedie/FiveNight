@@ -1,27 +1,27 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local FiveNight = Rayfield:CreateWindow({
-	Name = "FiveNight",
-	LoadingTitle = "FiveNight",
+	Name = "FiveNight Hub 💫",
+	LoadingTitle = "FiveNight Hub 💫",
 	LoadingSubtitle = "by DevFriedie",
 	ConfigurationSaving = {
 	   Enabled = true,
-	   FolderName = FiveNight, -- Create a custom folder for your hub/game
+	   FolderName = FiveNight,
 	   FileName = "FiveNight Hub"
 	},
 	Discord = {
 	   Enabled = false,
-	   Invite = "", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
-	   RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+	   Invite = "",
+	   RememberJoins = true
 	},
-	KeySystem = true, -- Set this to true to use our key system
+	KeySystem = true,
 	KeySettings = {
-	   Title = "FiveNight Hub",
+	   Title = "FiveNight Hub 💫",
 	   Subtitle = "",
-	   Note = "Discord | Friedie#3095",
+	   Note = "Discord | Friedie",
 	   FileName = "FiveNightKey",
 	   SaveKey = true,
-	   GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+	   GrabKeyFromSite = false,
 	   Key = "37820958560987234570"
 	}
 
@@ -42,88 +42,215 @@ local FiveNight = Rayfield:CreateWindow({
  })
 
  --Values--
- getgenv().Infinite = true
- getgenv().FlowerESP = true
+ getgenv().DarkDex = true
+ getgenv().TurtleSpy = true
+ getgenv().AutoFarm = true
+ getgenv().FlowerFarm = true
+ getgenv().Muzan = true
+ getgenv().Aimbot = true
+ getgenv().Esp = true
+ getgenv().Fly = true
+ getgenv().NoClip = true
 
  --Function--
 
-function Infinite()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+function DarkDex()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
 end
 
-function FlowerESP()
+function TurtleSpy()
+	loadstring(game:HttpGet("https://pastebin.com/raw/BDhSQqUU", true))()
+end
 
-local RunService = game:GetService("RunService")
+function Aimbot()
 
-RunService.RenderStepped:Connect(function()
-for i, v in pairs(game:GetService("Workspace").Demon_Flowers_Spawn:GetChildren()) do
-	if not v:FindFirstChild("FlowerESP") then
-		local BillboardGui = Instance.new("BillboardGui")
-		local TextLabel = Instance.new("TextLabel")
-		local Highlight = Instance.new("Highlight")
+end
 
-BillboardGui.Parent = v
-BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-BillboardGui.Active = true
-BillboardGui.AlwaysOnTop = true
-BillboardGui.LightInfluence = 1.000
-BillboardGui.Size = UDim2.new(0, 200, 0, 50)
-BillboardGui.Name = "FlowerESP"
-
-TextLabel.Parent = BillboardGui
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "Flower "..V:FindFirstChild("BillboardGui").TextLabel.Text
-TextLabel.TextColor3 = Color3.fromRGB(0, 110, 255)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 55.000
-TextLabel.TextStrokeTransparency = 0.250
-TextLabel.TextWrapped = true
-
-Highlight.Archivable = true
-Highlight.Adornee = v
-Highlight.Parent = v
-Highlight.Name = "ESPHighlight"
-Highlight.DephtMode = Enum.HighlightDepthMode.AlwaysOnTop
-Highlight.Enabled = true
-Highlight.FillColor = Color3.new(255,0,0)
-Highlight.FillTransparency = 0.5
-Highlight.OutlineColor = Color3.new(255,255,255)
-Highlight.OutlineTransparency = 0
-
-	end
-	end
-	end
+function Esp()
+	local esp_settings = {
+    textsize = 8,
+    colour = 255,255,255
+}
+ 
+local gui = Instance.new("BillboardGui")
+local esp = Instance.new("TextLabel",gui)
+ 
+ 
+ 
+gui.Name = "Esp";
+gui.ResetOnSpawn = false
+gui.AlwaysOnTop = true;
+gui.LightInfluence = 0;
+gui.Size = UDim2.new(1.75, 0, 1.75, 0);
+esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+esp.Text = ""
+esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001);
+esp.BorderSizePixel = 4;
+esp.BorderColor3 = Color3.new(esp_settings.colour)
+esp.BorderSizePixel = 0
+esp.Font = "GothamSemibold"
+esp.TextSize = esp_settings.textsize
+esp.TextColor3 = Color3.fromRGB(esp_settings.colour)
+ 
+game:GetService("RunService").RenderStepped:Connect(function()
+    for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+        if v ~= game:GetService("Players").LocalPlayer and v.Character.Head:FindFirstChild("Esp")==nil  then
+            esp.Text = "{"..v.Name.."}"
+            gui:Clone().Parent = v.Character.Head
+    end
+end
 end)
+	
+end
+
+function NoClip()
 
 end
+
+function Fly()
+
+end
+
+ --AutoFarm--
+
+function AutoFarm()
+
+end
+
+function FlowerFarm()
+
+end
+
+ --Teleport--
+
+function Muzan()
+
+end
+
+ --Tabs--
 
  local Tab = FiveNight:CreateTab("Main")
 
  local Section = Tab:CreateSection("Main Settings")
 
- local Button = Tab:CreateButton({
-	Name = "FlowerESP",
-	Callback = function()
-	FlowerESP()
+ local Slider = Tab:CreateSlider({
+	Name = "WalkSpeed",
+	Range = {16, 25000},
+	Increment = 10,
+	Suffix = "WalkSpeed",
+	CurrentValue = 10,
+	Flag = "",
+	Callback = function(v)
+		getgenv().game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
 	end,
  })
 
-
-
- local Tab = FiveNight:CreateTab("Other Scripts")
-
- local Section = Tab:CreateSection("Scripts")
+ local Slider = Tab:CreateSlider({
+	Name = "JumpPower",
+	Range = {50, 500},
+	Increment = 10,
+	Suffix = "JumpPower",
+	CurrentValue = 10,
+	Flag = "", 
+	Callback = function(v)
+		getgenv().game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+	end,
+ })
 
  local Toggle = Tab:CreateToggle({
-	Name = "Infinite",
-	CurrentValue = false,
-	Flag = "", 
+    Name = "Aimbot",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function()
+	Aimbot()
+    end,
+})
+
+ local Button = Tab:CreateButton({
+	Name = "Esp",
 	Callback = function()
-		Infinite()
+	Esp()
 	end,
  })
 
-Rayfield:LoadConfiguration()
+ local Toggle = Tab:CreateToggle({
+    Name = "Fly",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function()
+	Fly()
+    end,
+})
+
+ local Toggle = Tab:CreateToggle({
+    Name = "NoClip",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function()
+	NoClip()
+    end,
+})
+
+ local Button = Tab:CreateButton({
+	Name = "DarkDex",
+	Callback = function()
+	DarkDex()
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "TurtleSpy",
+	Callback = function()
+	TurtleSpy()
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Destroy Interface",
+	Callback = function()
+		Rayfield:Destroy()
+	end,
+ })
+
+ local Tab = FiveNight:CreateTab("AutoFarm")
+
+ local Section = Tab:CreateSection("AutoFarm Settings")
+
+ local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+	AutoFarm()
+    end,
+})
+
+ local Toggle = Tab:CreateToggle({
+    Name = "FlowerFarm",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+    FlowerFarm()
+    end,
+})
+
+ local Tab = FiveNight:CreateTab("Teleport")
+
+ local Section = Tab:CreateSection("Teleport Settings")
+
+ local Button = Tab:CreateButton({
+	Name = "Muzan",
+	Callback = function()
+    Muzan()
+	end,
+ })
+
+ local Dropdown = Tab:CreateDropdown({
+	Name = "Teleport to ",
+	Options = {"Kiribating Village","Butterfly Mansion"},
+	CurrentOption = "Kiribating Village",
+	MultipleOptions = false,
+	Callback = function(value)
+    end
+ })
+
