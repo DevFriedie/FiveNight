@@ -135,7 +135,7 @@ end
 
  local Slider = Tab:CreateSlider({
 	Name = "WalkSpeed",
-	Range = {16, 25000},
+	Range = {16, 250},
 	Increment = 10,
 	Suffix = "WalkSpeed",
 	CurrentValue = 10,
