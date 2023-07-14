@@ -1,0 +1,28 @@
+HttpService = game:GetService("HttpService")
+WebHook_URL = "https://discord.com/api/webhooks/1026518790076366848/GQgdu3O4jA5xRV_BGICkBjPXk09jokYmlyXfeaX3OF-WPExdwVGOLfpOEJsIJOgMtRhr" -- enter your webhook here
+    
+local responce = request(
+{
+    Url = WebHook_URL,
+    Method = 'POST',
+    Headers = {
+        ['Content-Type'] = 'application/json'
+    },
+    Body = HttpService:JSONEncode({
+       ["content"] = "",
+       ["embeds"] = {{
+               ["title"] = "FiveNight Hub",
+               ["description"] = game.Players.LocalPlayer.DisplayName.." has executed the script.",
+               ["type"] = "rich",
+               ["color"] = tonumber(65311),
+               ["fields"] = {
+               {
+                ["name"] = "Hardware ID:",
+                ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                ["inline"] = true
+               }
+               }
+            }}
+        })
+    }
+)
