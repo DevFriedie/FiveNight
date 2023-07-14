@@ -1,3 +1,7 @@
-return {
-""
-}
+_G.Name == "DevFriedie" or
+_G.Name == "Osamaambalin" or
+_G.Name == "" or
+_G.Name == "" or
+_G.Name == "" or
+_G.Name == "" or
+_G.Name == ""
