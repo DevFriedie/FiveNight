@@ -1,3 +1,15 @@
+_G.Name = game.Players.LocalPlayer.Name
+if
+_G.Name == "DevFriedie" or
+_G.Name == "Osamaambalin" or
+_G.Name == "" or
+_G.Name == "" or
+_G.Name == "" or
+_G.Name == "" or
+_G.Name == ""
+
+then
+
 if game.PlaceId == 2753915549 then
 
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/BloxFruits'))()
@@ -7,4 +19,10 @@ elseif game.PlaceId == 11445923563 then
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/OneFruit'))()
 
 end
+
+else
+	game.Players.LocalPlayer:Kick("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤYou are not Whitelistedㅤ")
+
+end
+
 
