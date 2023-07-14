@@ -1,9 +1,9 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local FiveNight = Rayfield:CreateWindow({
-	Name = "FiveNight Hub 💫",
+	Name = "FiveNight Hub 💫 | Blox Fruits",
 	LoadingTitle = "FiveNight Hub 💫",
-	LoadingSubtitle = "by DevFriedie",
+	LoadingSubtitle = "by DevFriedie | Blox Fruits",
 	ConfigurationSaving = {
 	   Enabled = true,
 	   FolderName = FiveNight,
@@ -16,7 +16,7 @@ local FiveNight = Rayfield:CreateWindow({
 	},
 	KeySystem = true,
 	KeySettings = {
-	   Title = "FiveNight Hub 💫 | Blox Fruits",
+	   Title = "FiveNight Hub 💫",
 	   Subtitle = "",
 	   Note = "Discord | Friedie",
 	   FileName = "FiveNightKey",
