@@ -2,7 +2,7 @@ _G.Name = game.Players.LocalPlayer.Name
 if
 _G.Name == "DevFriedie" or
 _G.Name == "Osamaambalin" or
-_G.Name == "" or
+_G.Name == "DevFriedie4" or
 _G.Name == "" or
 _G.Name == "" or
 _G.Name == "" or
