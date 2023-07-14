@@ -204,6 +204,19 @@ local FiveNight = Rayfield:CreateWindow({
 	end,
  })
 
+ local Tab = FiveNight:CreateTab("AutoFarm")
+
+ local Section = Tab:CreateSection("AutoFarm Settings")
+
+ local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+	AutoFarm()
+    end,
+})
+
  local Tab = FiveNight:CreateTab("Teleport")
 
  local Section = Tab:CreateSection("Teleport Settings")
