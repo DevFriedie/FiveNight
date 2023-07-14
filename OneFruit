@@ -1,8 +1,8 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local FiveNight = Rayfield:CreateWindow({
-	Name = "FiveNight Hub 💫 | OneFruit",
-	LoadingTitle = "FiveNight Hub 💫 | OneFruit",
+	Name = "FiveNight Hub 💫 | One Fruit",
+	LoadingTitle = "FiveNight Hub 💫 | One Fruit",
 	LoadingSubtitle = "by DevFriedie",
 	ConfigurationSaving = {
 	   Enabled = true,
