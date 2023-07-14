@@ -1,0 +1,52 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local FiveNight = Rayfield:CreateWindow({
+	Name = "FiveNight Hub 💫 | OneFruit",
+	LoadingTitle = "FiveNight Hub 💫 | OneFruit",
+	LoadingSubtitle = "by DevFriedie",
+	ConfigurationSaving = {
+	   Enabled = true,
+	   FolderName = FiveNight,
+	   FileName = "FiveNight Hub"
+	},
+	Discord = {
+	   Enabled = false,
+	   Invite = "",
+	   RememberJoins = true
+	},
+	KeySystem = true,
+	KeySettings = {
+	   Title = "FiveNight Hub 💫",
+	   Subtitle = "",
+	   Note = "Discord | Friedie",
+	   FileName = "FiveNightKey",
+	   SaveKey = true,
+	   GrabKeyFromSite = false,
+	   Key = "37820958560987234570"
+	}
+
+ })
+
+ Rayfield:Notify({
+	Title = "⚠️",
+	Content = "Only use Fluxus as executor!",
+	Duration = 6.5,
+	Actions = { 
+	   Ignore = {
+		  Name = "Okay!",
+		  Callback = function()
+		  print("The user tapped Okay!")
+	   end
+	},
+ },
+ })
+
+ local Tab = FiveNight:CreateTab("Main")
+
+ local Section = Tab:CreateSection("Main Settings")
+
+ local Button = Tab:CreateButton({
+	Name = "Button Example",
+	Callback = function()
+	end,
+ })
