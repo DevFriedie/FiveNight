@@ -16,7 +16,7 @@ local FiveNight = Rayfield:CreateWindow({
 	},
 	KeySystem = true,
 	KeySettings = {
-	   Title = "FiveNight Hub 💫",
+	   Title = "FiveNight Hub 💫 | Blox Fruits",
 	   Subtitle = "",
 	   Note = "Discord | Friedie",
 	   FileName = "FiveNightKey",
