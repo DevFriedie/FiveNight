@@ -49,6 +49,7 @@ local FiveNight = Rayfield:CreateWindow({
   getgenv().Esp = true
   getgenv().Fly = true
   getgenv().NoClip = true
+  getgenv().AllTools = true
  
   --Function--
  
@@ -107,6 +108,14 @@ local FiveNight = Rayfield:CreateWindow({
  
  function Fly()
  
+ end
+
+ function AllTools()
+    for _, tool in ipairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+             tool.Parent = game:GetService("Players").LocalPlayer.Character
+        end
+    end
  end
  
   --AutoFarm--
@@ -183,16 +192,14 @@ local FiveNight = Rayfield:CreateWindow({
     end,
 })
 
-local Button = Tab:CreateButton({
-	Name = "Equip All Tools",
-	Callback = function()
-		for _, tool in ipairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-            if tool:IsA("Tool") then
-                 tool.Parent = game:GetService("Players").LocalPlayer.Character
-            end
-        end
+Tab:CreateInput({
+	Name = "FPS Cap",
+	PlaceholderText = "Input Placeholder",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(Text)
+	    setfpscap(Text)
 	end,
- })
+})
 
  local Button = Tab:CreateButton({
 	Name = "DarkDex",
@@ -232,11 +239,111 @@ local Button = Tab:CreateButton({
 
  local Section = Tab:CreateSection("Teleport Settings")
 
- local Dropdown = Tab:CreateDropdown({
-	Name = "Teleport to ",
-	Options = {"1","2"},
-	CurrentOption = "1",
-	MultipleOptions = false,
-	Callback = function(Value)
-    end
+ local Button = Tab:CreateButton({
+	Name = "Starter Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3480.21021, 500, 2136.61084, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
  })
+
+ local Button = Tab:CreateButton({
+	Name = "Jungle Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1680.75146, 500, 746.547974, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Clown Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3005.51416, 500, -842.589294, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Marine Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5299.88867, 500, 34.7914429, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+ 
+ local Button = Tab:CreateButton({
+	Name = "Lier Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5736.42188, 500, 2337.90649, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Baratee Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1375.63965, 500, 2658.14429, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Arlong Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-879.212158, 500, 384.129333, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Lulue Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6076.55371, 500, -3615.35815, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Lulue Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6076.55371, 500, -3615.35815, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Coliseum Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1045.09607, 500, -1035.23376, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+	end,
+ })
+
+ local Button = Tab:CreateButton({
+	Name = "Summer Island",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2997.80396, 132.063004, -3182.55981, -0.954150915, 0, 0.299326509, 0, 1, 0, -0.299326509, 0, -0.954150915)
+	end,
+ })
+
+ local Tab = FiveNight:CreateTab("One Fruit")
+
+ local Section = Tab:CreateSection("One Fruit Settings")
+
+ local Button = Tab:CreateButton({
+	Name = "Equip All Tools",
+	Callback = function()
+		for _, tool in ipairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+            if tool:IsA("Tool") then
+                 tool.Parent = game:GetService("Players").LocalPlayer.Character
+            end
+        end
+	end,
+ })
+
+ Tab:CreateToggle({
+	Name = "Auto Quest",
+	CurrentValue = false,
+	Callback = function(Value)
+		while true do
+			task.wait()
+				pcall(function()
+					local container = Client.PlayerGui.Quests.CurrentQuestContainer
+					container:GetPropertyChangedSignal("Position"):Wait()
+					if container.Position ~= UDim2.new({ { 0.823, 0 }, { 0.362, 0 } }) then
+						RemoteNet:Fire("GetQuest", Client.PlayerGui.Quests:GetAttribute("CurrentQuest"))
+					end
+				end)
+			end
+	end,
+})
