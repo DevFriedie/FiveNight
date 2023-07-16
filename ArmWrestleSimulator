@@ -60,7 +60,7 @@ local FiveNight = Rayfield:CreateWindow({
  end
 
  function GodMode()
-	
+
  end
 
  function Esp()
@@ -107,6 +107,10 @@ local FiveNight = Rayfield:CreateWindow({
  function NoClip()
 
  end
+
+ --Teleport--
+
+
 
  --Tabs--
 
@@ -381,33 +385,16 @@ local Toggle = Tab:CreateToggle({
 		if state then
 			_G.loop = true
 		while _G.loop == true do wait()
-        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
-		end
-	else
-		_G.loop = false
-				while _G.loop == true do wait()
-					print('STOP')
-				end
-	end
-	end,
-})
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10327.4893, 5.23331785, 72.4086533, -0.0289377756, 5.39446994e-08, 0.999581218, 6.18021501e-09, 1, -5.37883835e-08, -0.999581218, 4.62111061e-09, -0.0289377756)
 
-local Toggle = Tab:CreateToggle({
-    Name = "AutoStart",
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(state)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10327.4893, 5.23331785, 72.4086533, -0.0289377756, 5.39446994e-08, 0.999581218, 6.18021501e-09, 1, -5.37883835e-08, -0.999581218, 4.62111061e-09, -0.0289377756)
-
-		if state then
-			_G.loop = true
-		while _G.loop == true do wait()
 			local virtualUser = game:GetService('VirtualUser')
 			virtualUser:CaptureController()
 
 			virtualUser:SetKeyDown('0x65')
 			wait(2)
 			virtualUser:SetKeyUp('0x65')
+
+        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
 		end
 	else
 		_G.loop = false
@@ -444,3 +431,23 @@ local Toggle = Tab:CreateToggle({
 local Tab = FiveNight:CreateTab("Teleport")
 
 local Section = Tab:CreateSection("Teleport Settings")
+
+local Dropdown = Tab:CreateDropdown({
+	Name = "Select Player",
+	Options = {"DevFriedie", "OsamaamBalin", "xiywn", "DevFriedieALT"},
+	CurrentOption = {"Nothing"},
+	MultipleOptions = false,
+	Flag = "",
+	Callback = function()
+
+	if "DevFriedie" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.DevFriedie.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "OsamaamBalin" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.OsamaamBalin.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "xiywn" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.xiywn.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "DevFriedieALT" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.DevFriedieALT.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	end
+	end,
+ })
