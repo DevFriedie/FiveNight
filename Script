@@ -22,11 +22,13 @@ elseif game.PlaceId == 13127800756 then
 
         loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/ArmWrestleSimulator'))()
 
+elseif game.PlaceId == 606849621 then
+
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/Jailbreak'))()
+
 end
 
 else
 	game.Players.LocalPlayer:Kick("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤYou are not Whitelistedㅤ")
 
 end
-
-
