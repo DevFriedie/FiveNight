@@ -44,12 +44,10 @@ local FiveNight = Rayfield:CreateWindow({
   --Values--
   getgenv().DarkDex = true
   getgenv().TurtleSpy = true
-  getgenv().AutoFarm = true
-  getgenv().Aimbot = true
+  getgenv().GodMode = true
   getgenv().Esp = true
   getgenv().Fly = true
   getgenv().NoClip = true
-  getgenv().AllTools = true
  
   --Function--
  
@@ -59,10 +57,6 @@ local FiveNight = Rayfield:CreateWindow({
  
  function TurtleSpy()
      loadstring(game:HttpGet("https://pastebin.com/raw/BDhSQqUU", true))()
- end
- 
- function Aimbot()
- 
  end
  
  function Esp()
@@ -102,29 +96,96 @@ local FiveNight = Rayfield:CreateWindow({
      
  end
  
- function NoClip()
- 
- end
  
  function Fly()
+	repeat wait()
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("UpperTorso") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid")
+ local mouse = game.Players.LocalPlayer:GetMouse()
+ repeat wait() until mouse
+ local plr = game.Players.LocalPlayer
+ local UpperTorso = plr.Character.UpperTorso
+ local flying = true
+ local deb = true
+ local ctrl = {f = 0, b = 0, l = 0, r = 0}
+ local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+ local maxspeed = 50
+ local speed = 0
  
+ function Fly()
+ local bg = Instance.new("BodyGyro", UpperTorso)
+ bg.P = 9e4
+ bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+ bg.cframe = UpperTorso.CFrame
+ local bv = Instance.new("BodyVelocity", UpperTorso)
+ bv.velocity = Vector3.new(0,0.1,0)
+ bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+ repeat wait()
+ plr.Character.Humanoid.PlatformStand = true
+ if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+ speed = speed+.5+(speed/maxspeed)
+ if speed > maxspeed then
+ speed = maxspeed
+ end
+ elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+ speed = speed-1
+ if speed < 0 then
+ speed = 0
+ end
+ end
+ if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+ bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+ lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+ elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+ bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+ else
+ bv.velocity = Vector3.new(0,0.1,0)
+ end
+ bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+ until not flying
+ ctrl = {f = 0, b = 0, l = 0, r = 0}
+ lastctrl = {f = 0, b = 0, l = 0, r = 0}
+ speed = 0
+ bg:Destroy()
+ bv:Destroy()
+ plr.Character.Humanoid.PlatformStand = false
+ end
+ mouse.KeyDown:connect(function(key)
+ if key:lower() == "e" then
+ if flying then flying = false
+ else
+ flying = true
+ Fly()
+ end
+ elseif key:lower() == "w" then
+ ctrl.f = 1
+ elseif key:lower() == "s" then
+ ctrl.b = -1
+ elseif key:lower() == "a" then
+ ctrl.l = -1
+ elseif key:lower() == "d" then
+ ctrl.r = 1
+ end
+ end)
+ mouse.KeyUp:connect(function(key)
+ if key:lower() == "w" then
+ ctrl.f = 0
+ elseif key:lower() == "s" then
+ ctrl.b = 0
+ elseif key:lower() == "a" then
+ ctrl.l = 0
+ elseif key:lower() == "d" then
+ ctrl.r = 0
+ end
+ end)
+ Fly()
+
  end
 
- function AllTools()
-    for _, tool in ipairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-        if tool:IsA("Tool") then
-             tool.Parent = game:GetService("Players").LocalPlayer.Character
-        end
-    end
- end
- 
-  --AutoFarm--
- 
- function AutoFarm()
- 
+ function NoClip()
+
  end
 
- --Teleport--
+ --Table--
 
 
 
@@ -142,7 +203,16 @@ local FiveNight = Rayfield:CreateWindow({
 	CurrentValue = 10,
 	Flag = "",
 	Callback = function(v)
-		getgenv().game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+		local GMT = getrawmetatable(game)
+		setreadonly(GMT, false)
+		local oldindex = GMT._index
+			GMT._index = newcclosure(function (self, b)
+				if b == "WalkSpeed" then
+					return 16
+				end
+			return oldindex(self, b)
+		end)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
 	end,
  })
 
@@ -154,16 +224,25 @@ local FiveNight = Rayfield:CreateWindow({
 	CurrentValue = 10,
 	Flag = "", 
 	Callback = function(v)
-		getgenv().game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+		local GMT = getrawmetatable(game)
+		setreadonly(GMT, false)
+		local oldindex = GMT._index
+			GMT._index = newcclosure(function (self, b)
+				if b == "JumpPower" then
+					return 16
+				end
+			return oldindex(self, b)
+		end)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
 	end,
  })
 
  local Toggle = Tab:CreateToggle({
-    Name = "Aimbot",
+    Name = "GodMode",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function()
-	Aimbot()
+
     end,
 })
 
@@ -188,16 +267,28 @@ local FiveNight = Rayfield:CreateWindow({
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function()
-	NoClip()
+    NoClip()
     end,
 })
 
-Tab:CreateInput({
-	Name = "FPS Cap",
-	PlaceholderText = "Input Placeholder",
-	RemoveTextAfterFocusLost = false,
-	Callback = function(Text)
-	    setfpscap(Text)
+local Toggle = Tab:CreateToggle({
+    Name = "AntiIdle",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("Players").LocalPlayer.Idled:connect(function()
+				game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+		end)
+	end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
 	end,
 })
 
@@ -226,18 +317,70 @@ Tab:CreateInput({
 
  local Section = Tab:CreateSection("AutoFarm Settings")
 
- local Toggle = Tab:CreateToggle({
+ local Dropdown = Tab:CreateDropdown({
+	Name = "Select Mob",
+	Options = {"Bandit","Bandit Leader"},
+	CurrentOption = {"Bandit"},
+	MultipleOptions = false,
+	Flag = "",
+	Callback = function()
+		MobList()
+	end,
+ })
+
+local Toggle = Tab:CreateToggle({
     Name = "AutoFarm",
     CurrentValue = false,
     Flag = "Toggle1",
-    Callback = function(Value)
-	AutoFarm()
+    Callback = function(state)
+	if state then
+		_G.loop = true
+	while _G.loop == true do wait()
+		game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+
+	Bandit = Bandits():FindFirstChild('HumanoidRootPart')
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Bandit.CFrame + Vector3.new(0, 15)
+	end
+else
+	_G.loop = false
+			while _G.loop == true do wait()
+				print('STOP')
+			end
+	end
     end,
 })
+
+local Button = Tab:CreateButton({
+	Name = "AutoChest",
+	Callback = function()
+		Bandit = Bandits
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Bandit.CFrame + Vector3.new(0, 15)
+	end,
+ })
 
  local Tab = FiveNight:CreateTab("Teleport")
 
  local Section = Tab:CreateSection("Teleport Settings")
+
+ local Dropdown = Tab:CreateDropdown({
+	Name = "Select Player",
+	Options = {"DevFriedie", "OsamaamBalin", "xiywn", "DevFriedieALT"},
+	CurrentOption = {"Nothing"},
+	MultipleOptions = false,
+	Flag = "",
+	Callback = function()
+
+	if "DevFriedie" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.DevFriedie.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "OsamaamBalin" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.OsamaamBalin.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "xiywn" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.xiywn.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "DevFriedieALT" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.DevFriedieALT.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	end
+	end,
+ })
 
  local Button = Tab:CreateButton({
 	Name = "Starter Island",
@@ -315,35 +458,3 @@ Tab:CreateInput({
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2997.80396, 132.063004, -3182.55981, -0.954150915, 0, 0.299326509, 0, 1, 0, -0.299326509, 0, -0.954150915)
 	end,
  })
-
- local Tab = FiveNight:CreateTab("One Fruit")
-
- local Section = Tab:CreateSection("One Fruit Settings")
-
- local Button = Tab:CreateButton({
-	Name = "Equip All Tools",
-	Callback = function()
-		for _, tool in ipairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-            if tool:IsA("Tool") then
-                 tool.Parent = game:GetService("Players").LocalPlayer.Character
-            end
-        end
-	end,
- })
-
- Tab:CreateToggle({
-	Name = "Auto Quest",
-	CurrentValue = false,
-	Callback = function(Value)
-		while true do
-			task.wait()
-				pcall(function()
-					local container = Client.PlayerGui.Quests.CurrentQuestContainer
-					container:GetPropertyChangedSignal("Position"):Wait()
-					if container.Position ~= UDim2.new({ { 0.823, 0 }, { 0.362, 0 } }) then
-						RemoteNet:Fire("GetQuest", Client.PlayerGui.Quests:GetAttribute("CurrentQuest"))
-					end
-				end)
-			end
-	end,
-})
