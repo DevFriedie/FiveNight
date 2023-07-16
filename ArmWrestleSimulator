@@ -44,13 +44,10 @@ local FiveNight = Rayfield:CreateWindow({
   --Values--
   getgenv().DarkDex = true
   getgenv().TurtleSpy = true
-  getgenv().AutoFarm = true
-  getgenv().AutoHit = true
   getgenv().GodMode = true
   getgenv().Esp = true
   getgenv().Fly = true
   getgenv().NoClip = true
-  getgenv().AllTools = true
  
   --Function--
  
@@ -128,23 +125,10 @@ local FiveNight = Rayfield:CreateWindow({
 	 Clip = true
  end
 
- --AutoFarm--
-
- function AutoFarmBandit()
-	Bandit = game.Workspace.Enemies["Bandit [Lv. 5]"]:FindFirstChild('HumanoidRootPart')
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Bandit.CFrame + Vector3.new(0, 15)
- end
-
- function AutoFarmBanditLeader()
-	
- end
-
  --Tables--
 
- local MobList = {
-	Bandit = AutoFarmBandit,
-	BanditLeader = AutoFarmBanditLeader
- }
+
+
  --Tabs--
 
  local Tab = FiveNight:CreateTab("Main")
@@ -209,6 +193,27 @@ local FiveNight = Rayfield:CreateWindow({
     end,
 })
 
+local Toggle = Tab:CreateToggle({
+    Name = "AntiIdle",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("Players").LocalPlayer.Idled:connect(function()
+				game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+		end)
+	end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
+	end,
+})
+
  local Button = Tab:CreateButton({
 	Name = "DarkDex",
 	Callback = function()
@@ -234,118 +239,229 @@ local FiveNight = Rayfield:CreateWindow({
 
  local Section = Tab:CreateSection("AutoFarm Settings")
 
- local Dropdown = Tab:CreateDropdown({
-	Name = "Select Mob",
-	Options = {"Bandit","Bandit Leader"},
-	CurrentOption = {"Bandit"},
-	MultipleOptions = false,
-	Flag = "",
-	Callback = function()
-		MobList()
-	end,
- })
-
  local Toggle = Tab:CreateToggle({
-    Name = "AutoFarm",
+    Name = "AutoFarm Dumbells",
     CurrentValue = false,
     Flag = "Toggle1",
-    Callback = function()
-
+    Callback = function(state)
+		if state then
+		_G.loop = true
+		while _G.loop == true do wait()
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.ToolService.RE.onClick:FireServer()
+		end
+		else
+			_G.loop = false
+			while _G.loop == true do wait()
+				print('STOP')
+			end
+		end
 	end,
 })
 
 local Toggle = Tab:CreateToggle({
-    Name = "AutoHit",
+    Name = "AutoFarm Strength 0",
     CurrentValue = false,
     Flag = "Toggle1",
-    Callback = function()
-    	getgenv().AutoHit = false
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10226.0986, 5.23331785, 114.595078, -0.0145031316, 0, -0.999894857, 0, 1, -0, 0.999894857, -0, -0.0145031316)
 
-	while getgenv().AutoHit == false do
-		wait(0.1)
-	    game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats:FireServer("1","Tier1")
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
 	end
-    end,
-	getgenv().AutoHit == true
+	end,
 })
 
- local Tab = FiveNight:CreateTab("Teleport")
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm Strength 400",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10225.7891, 5.23331785, 123.78981, -0.0134590212, 0, -0.999909461, 0, 1.00000012, -0, 0.999909461, -0, -0.0134590212)
 
- local Section = Tab:CreateSection("Teleport Settings")
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats:FireServer("1","Tier2")
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
+	end,
+})
 
- local Button = Tab:CreateButton({
-	Name = "Starter Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3480.21021, 500, 2136.61084, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-	end,
- })
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm Strength 3k",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10226.6904, 5.23331785, 129.540649, -0.77339977, 0, -0.633918643, 0, 1, -0, 0.633918643, -0, -0.77339977)
 
- local Button = Tab:CreateButton({
-	Name = "Jungle Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1680.75146, 500, 746.547974, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats:FireServer("1","Tier3")
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
 	end,
- })
+})
 
- local Button = Tab:CreateButton({
-	Name = "Clown Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3005.51416, 500, -842.589294, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-	end,
- })
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm Strength 15k",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10235.0684, 5.23331881, 129.442963, -0.999001801, 0, -0.0446704663, 0, 1.00000012, -0, 0.0446704663, -0, -0.999001801)
 
- local Button = Tab:CreateButton({
-	Name = "Marine Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5299.88867, 500, 34.7914429, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats:FireServer("1","Tier4")
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
 	end,
- })
- 
- local Button = Tab:CreateButton({
-	Name = "Lier Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5736.42188, 500, 2337.90649, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-	end,
- })
+})
 
- local Button = Tab:CreateButton({
-	Name = "Baratee Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1375.63965, 500, 2658.14429, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-	end,
- })
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm Strength 39k",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10244.6992, 5.23331785, 129.419922, -0.997390568, 0, -0.0721946731, 0, 1, -0, 0.0721946731, -0, -0.997390568)
 
- local Button = Tab:CreateButton({
-	Name = "Arlong Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-879.212158, 500, 384.129333, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats:FireServer("1","Tier5")
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
 	end,
- })
+})
 
- local Button = Tab:CreateButton({
-	Name = "Lulue Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6076.55371, 500, -3615.35815, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-	end,
- })
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFarm Strength 100k",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10253.5215, 5.23331785, 129.660339, -0.999835968, 0, -0.018118022, 0, 1.00000012, -0, 0.0181180239, -0, -0.999835849)
 
- local Button = Tab:CreateButton({
-	Name = "Lulue Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6076.55371, 500, -3615.35815, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+		game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.PunchBagService.RE.onGiveStats:FireServer("1","Tier6")
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
 	end,
- })
+})
 
- local Button = Tab:CreateButton({
-	Name = "Coliseum Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1045.09607, 500, -1035.23376, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-	end,
- })
+local Tab = FiveNight:CreateTab("AutoFight")
 
- local Button = Tab:CreateButton({
-	Name = "Summer Island",
-	Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2997.80396, 132.063004, -3182.55981, -0.954150915, 0, 0.299326509, 0, 1, 0, -0.299326509, 0, -0.954150915)
+local Section = Tab:CreateSection("AutoFight Settings")
+
+local Toggle = Tab:CreateToggle({
+    Name = "AutoFight",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
 	end,
- })
+})
+
+local Toggle = Tab:CreateToggle({
+    Name = "AutoStart",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10327.4893, 5.23331785, 72.4086533, -0.0289377756, 5.39446994e-08, 0.999581218, 6.18021501e-09, 1, -5.37883835e-08, -0.999581218, 4.62111061e-09, -0.0289377756)
+
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+			local virtualUser = game:GetService('VirtualUser')
+			virtualUser:CaptureController()
+
+			virtualUser:SetKeyDown('0x65')
+			wait(2)
+			virtualUser:SetKeyUp('0x65')
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
+	end,
+})
+
+local Tab = FiveNight:CreateTab("AutoRebirth")
+
+local Section = Tab:CreateSection("AutoRebirth Settings")
+
+local Toggle = Tab:CreateToggle({
+    Name = "AutoRebirth",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.RebirthService.RE.onRebirthRequest:FireServer()
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+	end
+	end,
+})
+
+local Tab = FiveNight:CreateTab("Teleport")
+
+local Section = Tab:CreateSection("Teleport Settings")
