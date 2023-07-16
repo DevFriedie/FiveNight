@@ -104,10 +104,6 @@ function NoClip()
 
 end
 
-function Fly()
-
-end
-
  --Teleport--
 
 
@@ -126,15 +122,6 @@ end
 	CurrentValue = 10,
 	Flag = "",
 	Callback = function(v)
-		local GMT = getrawmetatable(game)
-		setreadonly(GMT, false)
-		local oldindex = GMT._index
-			GMT._index = newcclosure(function (self, b)
-				if b == "WalkSpeed" then
-					return 16
-				end
-			return oldindex(self, b)
-		end)
 		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
 	end,
  })
@@ -147,15 +134,6 @@ end
 	CurrentValue = 10,
 	Flag = "", 
 	Callback = function(v)
-		local GMT = getrawmetatable(game)
-		setreadonly(GMT, false)
-		local oldindex = GMT._index
-			GMT._index = newcclosure(function (self, b)
-				if b == "JumpPower" then
-					return 16
-				end
-			return oldindex(self, b)
-		end)
 		game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
 	end,
  })
@@ -180,8 +158,171 @@ end
     Name = "Fly",
     CurrentValue = false,
     Flag = "Toggle1",
-    Callback = function()
-	Fly()
+    Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do wait()
+-- // Config: \\ --
+
+local tool = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("Handle");
+local stopbind = "e";
+
+-- // Main: \\ --
+
+game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 0;
+ 
+local NetworkAccess =
+    coroutine.create(
+    function()
+	settings().Physics.AllowSleep = false
+	while true do
+		game:GetService('RunService').Heartbeat:wait()
+		local TBL = game:GetService("Players"):GetChildren()
+		for key = 1, #TBL do
+			local Players = TBL[key]
+			if Players ~= game:GetService("Players").LocalPlayer then
+    sethiddenproperty(Players, "SimulationRadius", 0)
+    sethiddenproperty(game.Players.LocalPlayer, "MaximumSimulationRadius", 0)
+
+			end
+		end
+	end
+end
+)
+coroutine.resume(NetworkAccess)
+
+sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+sethiddenproperty(game.Players.LocalPlayer, "MaximumSimulationRadius", math.huge)
+
+local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+repeat
+	wait()
+until mouse
+local plr = game:GetService("Players").LocalPlayer;
+workspace.CurrentCamera.CameraSubject = tool;
+
+local flying = true
+local deb = true
+local ctrl = {
+	f = 0,
+	b = 0,
+	l = 0,
+	r = 0
+}
+local lastctrl = {
+	f = 0,
+	b = 0,
+	l = 0,
+	r = 0
+}
+local maxspeed = 50
+local speed = 0
+
+function Fly()
+	local bg = Instance.new("BodyGyro", tool)
+	bg.P = 9e4
+	bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+	bg.cframe = tool.CFrame
+	local bv = Instance.new("BodyVelocity", tool)
+	bv.velocity = Vector3.new(0, 0.1, 0)
+	bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+
+	pcall(function()
+		for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do 
+			if v.Name:find("Grip") or v.Name:find("grip") and v.Parent.Name:find("Right") then 
+				v:Destroy()
+			end 
+		end 
+	end)
+
+	repeat
+		wait()
+		if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+			speed = speed + .5 + (speed / maxspeed)
+			if speed > maxspeed then
+				speed = maxspeed
+			end
+		elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+			speed = speed - 1
+			if speed < 0 then
+				speed = 0
+			end
+		end
+		if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+			bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f + ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l + ctrl.r, (ctrl.f + ctrl.b) * .2, 0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
+			lastctrl = {
+				f = ctrl.f,
+				b = ctrl.b,
+				l = ctrl.l,
+				r = ctrl.r
+			}
+		elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+			bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f + lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l + lastctrl.r, (lastctrl.f + lastctrl.b) * .2, 0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p)) * speed
+		else
+			bv.velocity = Vector3.new(0, 0.1, 0)
+		end
+		bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f + ctrl.b) * 50 * speed / maxspeed), 0, 0)
+	until not flying
+	ctrl = {
+		f = 0,
+		b = 0,
+		l = 0,
+		r = 0
+	}
+	lastctrl = {
+		f = 0,
+		b = 0,
+		l = 0,
+		r = 0
+	}
+	speed = 0
+	bg:Destroy()
+	bv:Destroy()
+end
+
+mouse.KeyDown:connect(function(key)
+	if key:lower() == stopbind then
+		if flying then 
+			flying = false 
+			game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 16;
+			workspace.CurrentCamera.CameraSubject = game:GetService("Players").LocalPlayer.Character.Humanoid
+			flying = false;
+		else
+			flying = true
+			Fly()
+		end
+	elseif key:lower() == "e" then
+
+	elseif key:lower() == "w" then
+		ctrl.f = 1
+	elseif key:lower() == "s" then
+		ctrl.b = -1
+	elseif key:lower() == "a" then
+		ctrl.l = -1
+	elseif key:lower() == "d" then
+		ctrl.r = 1
+	end
+end)
+
+mouse.KeyUp:connect(function(key)
+	if key:lower() == "w" then
+		ctrl.f = 0
+	elseif key:lower() == "s" then
+		ctrl.b = 0
+	elseif key:lower() == "a" then
+		ctrl.l = 0
+	elseif key:lower() == "d" then
+		ctrl.r = 0
+	end
+end)
+Fly()
+		end
+		else
+		_G.loop = false
+				while _G.loop == true do wait()
+					print('STOP')
+				end
+			end
     end,
 })
 
@@ -264,57 +405,24 @@ else
 
  local Tab = FiveNight:CreateTab("Teleport")
 
- local Section = Tab:CreateSection("NPC Settings")
-
- local Button = Tab:CreateButton({
-	Name = "Random Fruit Dealer",
-	Callback = function()
-		local lp = game.Players.LocalPlayer
-		local char = lp.Character
-		function bypassTP(cf, t)
-			local hrp = char.PrimaryPart
-			local ts = game:GetService('TweenService')
-			ts:Create(hrp,
-			TweenInfo.new(t, Enum["EasingStyle"].Linear),
-			{CFrame = cf
-			}):Play()
-		end
-		bypassTP(CFrame.new(-1433.09729, 61.8519554, 2.11395454, -0.494115859, -7.92715866e-08, 0.869396091, -2.6651616e-08, 1, 7.60327836e-08, -0.869396091, 1.4398192e-08, -0.494115859), 7)
-	end,
- })
-
  local Section = Tab:CreateSection("Teleport Settings")
 
- local Button = Tab:CreateButton({
-	Name = "Pirate Starter",
+ local Dropdown = Tab:CreateDropdown({
+	Name = "Select Player",
+	Options = {"DevFriedie", "OsamaamBalin", "xiywn", "DevFriedieALT"},
+	CurrentOption = {"Nothing"},
+	MultipleOptions = false,
+	Flag = "",
 	Callback = function()
-			local lp = game.Players.LocalPlayer
-			local char = lp.Character
-			function bypassTP(cf, t)
-				local hrp = char.PrimaryPart
-				local ts = game:GetService('TweenService')
-				ts:Create(hrp,
-				TweenInfo.new(t, Enum["EasingStyle"].Linear),
-				{CFrame = cf
-				}):Play()
-			end
-			bypassTP(CFrame.new(894.339783, 16.5166092, 1428.13733, -0.0134113841, -3.54116203e-08, -0.999910057, -1.13161658e-08, 1, -3.52630281e-08, 0.999910057, 1.08422213e-08, -0.0134113841), 7)
-	end,
- })
 
- local Button = Tab:CreateButton({
-	Name = "Middle Town",
-	Callback = function()
-			local lp = game.Players.LocalPlayer
-			local char = lp.Character
-			function bypassTP(cf, t)
-				local hrp = char.PrimaryPart
-				local ts = game:GetService('TweenService')
-				ts:Create(hrp,
-				TweenInfo.new(t, Enum["EasingStyle"].Linear),
-				{CFrame = cf
-				}):Play()
-			end
-			bypassTP(CFrame.new(-833.209961, -3.78197479, 1628.13696, 1, 0, 0, 0, 1, 0, 0, 0, 1), 7)
+	if "DevFriedie" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.DevFriedie.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "OsamaamBalin" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.OsamaamBalin.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "xiywn" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.xiywn.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	elseif "DevFriedieALT" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.DevFriedieALT.Character.HumanoidRootPart.CFrame + Vector3.new(0.2, 125)
+	end
 	end,
  })
