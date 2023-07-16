@@ -26,6 +26,10 @@ elseif game.PlaceId == 606849621 then
 
     loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/Jailbreak'))()
 
+elseif game.PlaceId == 4639625707 then
+
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/DevFriedie/FiveNight/main/WarTycoon'))()
+
 end
 
 else
