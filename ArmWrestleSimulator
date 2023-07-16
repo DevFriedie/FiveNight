@@ -384,21 +384,37 @@ local Toggle = Tab:CreateToggle({
     Callback = function(state)
 		if state then
 			_G.loop = true
-		while _G.loop == true do wait()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10327.4893, 5.23331785, 72.4086533, -0.0289377756, 5.39446994e-08, 0.999581218, 6.18021501e-09, 1, -5.37883835e-08, -0.999581218, 4.62111061e-09, -0.0289377756)
-
+		while _G.loop == true do task.wait()
 			local virtualUser = game:GetService('VirtualUser')
 			virtualUser:CaptureController()
 
 			virtualUser:SetKeyDown('0x65')
-			wait(2)
+			task.wait(2)
 			virtualUser:SetKeyUp('0x65')
-
-        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-10327.4893, 5.23331785, 72.4086533, -0.0289377756, 5.39446994e-08, 0.999581218, 6.18021501e-09, 1, -5.37883835e-08, -0.999581218, 4.62111061e-09, -0.0289377756)
 		end
 	else
 		_G.loop = false
-				while _G.loop == true do wait()
+				while _G.loop == true do task.wait()
+					print('STOP')
+				end
+	end
+	end,
+})
+
+local Toggle = Tab:CreateToggle({
+    Name = "AutoTap",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do task.wait()
+			game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.7"].knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+		end
+	else
+		_G.loop = false
+				while _G.loop == true do task.wait()
 					print('STOP')
 				end
 	end
