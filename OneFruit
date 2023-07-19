@@ -181,14 +181,6 @@ local FiveNight = Rayfield:CreateWindow({
 
  end
 
- function NoClip()
-
- end
-
- --Table--
-
-
-
  --Tabs--
 
  local Tab = FiveNight:CreateTab("Main")
@@ -266,9 +258,40 @@ local FiveNight = Rayfield:CreateWindow({
     Name = "NoClip",
     CurrentValue = false,
     Flag = "Toggle1",
-    Callback = function()
-    NoClip()
-    end,
+    Callback = function(state)
+    	if state then
+			_G.loop = true
+		while _G.loop == true do task.wait()
+	
+		local plyr = game:GetService("Players").LocalPlayer
+	
+		game:GetService("RunService").Stepped:Connect(function()
+		   for i,v in pairs(plyr.Character:GetDescendants()) do
+			   if v:IsA("BasePart") and v.CanCollide == true then
+				   v.CanCollide = false
+			   end
+			end
+	end)
+	
+	end
+		
+	else
+		_G.loop = false
+				while _G.loop == true do task.wait()
+
+					local plyr = game:GetService("Players").LocalPlayer
+
+					game:GetService("RunService").Stepped:Connect(function()
+						   for i,v in pairs(plyr.Character:GetDescendants()) do
+							   if v:IsA("BasePart") and v.CanCollide == false then
+								   v.CanCollide = true
+					print('STOP')
+								   end
+			          end
+	         end)
+         end
+    end
+end,
 })
 
 local Toggle = Tab:CreateToggle({
@@ -335,15 +358,25 @@ local Toggle = Tab:CreateToggle({
     Callback = function(state)
 	if state then
 		_G.loop = true
-	while _G.loop == true do wait()
+	while _G.loop == true do task.wait()
+
 		game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
 
-	Bandit = Bandits():FindFirstChild('HumanoidRootPart')
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Bandit.CFrame + Vector3.new(0, 15)
+	Bandit = game.Workspace["__GAME"]["__Mobs"]["Ilha_01"].Bandit1.NpcModel:FindFirstChild('HumanoidRootPart')
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Bandit.CFrame + Vector3.new(0, 0)
+
+	for i,v in pairs(game.Workspace:GetChildren()) do
+		if v:IsA("HumanoidRootPart") and v.Name == "Bandit" then
+		   v.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0.2, 5, 0.2)
+		   v.UpperTorso.Anchored = true
+		   v.LowerTorso.Anchored = true
+		end
+	 end
+
 	end
 else
 	_G.loop = false
-			while _G.loop == true do wait()
+			while _G.loop == true do task.wait()
 				print('STOP')
 			end
 	end
@@ -351,10 +384,119 @@ else
 })
 
 local Button = Tab:CreateButton({
-	Name = "AutoChest",
-	Callback = function()
-		Bandit = Bandits
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Bandit.CFrame + Vector3.new(0, 15)
+    Name = "AutoQuest",
+    Callback = function(state)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3475.19653, 142.863388, 1881.88586, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+	wait(0.5)
+	game:GetService("ReplicatedStorage").RemoteEvent:FireServer({{"","GetQuest",1}})
+    end,
+})
+
+local Toggle = Tab:CreateToggle({
+	Name = "AutoChest Common",
+	CurrentValue = false,
+    Flag = "Toggle1",
+	Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do task.wait()
+
+		local me = game.Players.LocalPlayer
+		local tween = game:GetService'TweenService'
+		local speed = 100
+		local part = game.Workspace.Common.Cima.Parafusos
+		
+		tween:Create(me.Character.HumanoidRootPart,
+		TweenInfo.new(me:DistanceFromCharacter( part.Position )/speed, Enum.EasingStyle.Linear),
+		{CFrame = part.CFrame + Vector3.new (0,5,0) } ):Play()
+
+		local virtualUser = game:GetService('VirtualUser')
+		virtualUser:CaptureController()
+
+		virtualUser:SetKeyDown('0x65')
+		task.wait(2)
+		virtualUser:SetKeyUp('0x65')
+end
+
+	
+else
+	_G.loop = false
+			while _G.loop == true do task.wait()
+				print('STOP')
+			end
+end
+	end,
+ })
+
+ local Toggle = Tab:CreateToggle({
+	Name = "AutoChest Uncommon",
+	CurrentValue = false,
+    Flag = "Toggle1",
+	Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do task.wait()
+
+		local me = game.Players.LocalPlayer
+		local tween = game:GetService'TweenService'
+		local speed = 100
+		local part = game.Workspace.Uncommon.Cima.Parafusos
+		
+		tween:Create(me.Character.HumanoidRootPart,
+		TweenInfo.new(me:DistanceFromCharacter( part.Position )/speed, Enum.EasingStyle.Linear),
+		{CFrame = part.CFrame + Vector3.new (0,5,0) } ):Play()
+
+		local virtualUser = game:GetService('VirtualUser')
+		virtualUser:CaptureController()
+	
+		virtualUser:SetKeyDown('0x65')
+		task.wait(2)
+		virtualUser:SetKeyUp('0x65')
+end
+
+else
+	_G.loop = false
+			while _G.loop == true do task.wait()
+				print('STOP')
+				
+			end
+		end
+	end,
+ })
+
+ local Toggle = Tab:CreateToggle({
+	Name = "AutoChest Rare",
+	CurrentValue = false,
+    Flag = "Toggle1",
+	Callback = function(state)
+		if state then
+			_G.loop = true
+		while _G.loop == true do task.wait()
+
+		local me = game.Players.LocalPlayer
+		local tween = game:GetService'TweenService'
+		local speed = 100
+		local part = game.Workspace.Rare.Cima.Parafusos
+		
+		tween:Create(me.Character.HumanoidRootPart,
+		TweenInfo.new(me:DistanceFromCharacter( part.Position )/speed, Enum.EasingStyle.Linear),
+		{CFrame = part.CFrame + Vector3.new (0,5,0) } ):Play()
+
+		local virtualUser = game:GetService('VirtualUser')
+		virtualUser:CaptureController()
+	
+		virtualUser:SetKeyDown('0x65')
+		task.wait(2)
+		virtualUser:SetKeyUp('0x65')
+end
+
+else
+	_G.loop = false
+			while _G.loop == true do task.wait()
+				print('STOP')
+				
+			end
+		end
 	end,
  })
 
